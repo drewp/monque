@@ -94,7 +94,7 @@ class Monque(object):
             except pymongo.errors.OperationFailure:
                 pass # No matching object found
 
-        if not result:
+        if not result or not result['value']:
             return None
 
         result = result['value']
