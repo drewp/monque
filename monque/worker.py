@@ -10,7 +10,7 @@ import datetime
 import logging
 import multiprocessing
 import os
-import pymongo.objectid
+from bson.objectid import ObjectId
 import signal
 import socket
 import time
@@ -26,7 +26,7 @@ class MonqueWorker(object):
         self._dispatcher = dispatcher
     
     def register_worker(self):
-        self._worker_id = pymongo.objectid.ObjectId()
+        self._worker_id = ObjectId()
         c = self._monque.get_collection('workers')
 
         c.insert(dict(

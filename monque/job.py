@@ -11,6 +11,7 @@ import functools
 import pymongo
 import types
 import util
+from bson.objectid import ObjectId
 
 
 class MonqueJob(object):
@@ -33,7 +34,7 @@ class MonqueJob(object):
         self._func = func
         self._func_args = func_args
         self._func_kwargs = func_kwargs
-        self.id = id or pymongo.objectid.ObjectId()
+        self.id = id or ObjectId()
 
         super(MonqueJob, self).__init__()
 

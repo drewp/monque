@@ -11,11 +11,11 @@ import datetime
 import job
 import pymongo
 import pymongo.errors
-import pymongo.son
+import bson.son
 import util
 import uuid
 import worker
-from pymongo.objectid import ObjectId
+from bson.objectid import ObjectId
 
 
 class Monque(object):
@@ -75,7 +75,7 @@ class Monque(object):
             for operator, order in directions:
                 query['random_token'] = { operator : capture_token }
                 try:
-                    result = self.mongodb.command(pymongo.son.SON([
+                    result = self.mongodb.command(bson.son.SON([
                         ('findandmodify', c.name),
                         ('query', query),
                         ('sort', dict(random_token = order)),
@@ -86,7 +86,7 @@ class Monque(object):
                     break
         else:
             try:
-                result = self.mongodb.command(pymongo.son.SON([
+                result = self.mongodb.command(bson.son.SON([
                     ('findandmodify', c.name),
                     ('query', query),
                     ('sort', dict(scheduled_time = pymongo.ASCENDING)),
