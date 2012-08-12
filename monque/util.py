@@ -8,7 +8,7 @@ Created by Kurtiss Hare on 2010-03-12.
 
 _import_cache = dict()
 _setprocname = None
-
+import logging
 
 def get_toplevel_attrname(obj):
     return "{0.__module__}.{0.__name__}".format(obj)
@@ -24,8 +24,9 @@ def get_toplevel_attr(name):
 
     return _import_cache[name]
 
+_lastLoggedName = None
 def setprocname(name):
-    global _setprocname
+    global _setprocname, _lastLoggedName
 
     if _setprocname is None:
         try:
